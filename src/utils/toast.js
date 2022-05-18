@@ -2,6 +2,7 @@ import Vue from "vue";
 // variant (primary, danger, warning)
 const toast = (message, variant = "primary") => {
   const vm = new Vue({});
+
   return vm.$bvToast.toast(message, {
     title: "",
     noCloseButton: false,

@@ -34,6 +34,7 @@ Vue.prototype.$loadMessages = loadMessages;
   if (locale) {
     store.getters["lang/locales"].map((item) => {
       if (item.target === locale) check = true;
+
       return item;
     });
   }
