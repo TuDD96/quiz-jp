@@ -3,7 +3,8 @@ import i18n from "./i18n";
 
 const confirm = (message = "", title = "") => {
   const vm = new Vue({});
-  return vm.$bvModal
+  
+return vm.$bvModal
     .msgBoxConfirm(message, {
       modalClass: "c-confirm-box-modal",
       dialogClass: "c-confirm-box-dialog",

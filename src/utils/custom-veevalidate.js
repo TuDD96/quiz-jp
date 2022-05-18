@@ -17,6 +17,7 @@ export async function loadVeeValidate() {
     validate(value) {
       const now = new Date();
       const fieldDate = new Date(value);
+
       return fieldDate.getTime() <= now.getTime();
     },
   });
@@ -26,6 +27,7 @@ export async function loadVeeValidate() {
     validate(value) {
       const now = new Date();
       const fieldDate = new Date(value);
+
       return fieldDate.getTime() >= now.getTime();
     },
   });

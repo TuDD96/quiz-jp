@@ -1,121 +1,122 @@
-import apiCaller from '@/utils/api';
-import AuthToken from '@/utils/token';
+/* eslint-disable no-unused-vars */
+import apiCaller from "@/utils/api";
+import AuthToken from "@/utils/token";
 
 export default {
-  GET_LIST_ALGORITHM_QUESTION: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  GET_LIST_ALGORITHM_QUESTION: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.getRequest(
         `/api/algorithmQuestion?page=${payload.params.currentPage}`,
         payload,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  GET_EDIT_ALGORITHM_QUESTION: ({ commit }, questionId) => { // eslint-disable-line no-unused-vars
+  GET_EDIT_ALGORITHM_QUESTION: ({ commit }, questionId) => {
     return new Promise((resolve, reject) => {
       apiCaller.getRequest(
         `/api/algorithmQuestion/${questionId}/edit`,
         null,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  UPDATE_ALGORITHM_QUESTION: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  UPDATE_ALGORITHM_QUESTION: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.putRequest(
         `/api/algorithmQuestion/${payload.questionId}`,
         payload.data,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  CREATE_ALGORITHM_QUESTION: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  CREATE_ALGORITHM_QUESTION: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.postRequest(
-        '/api/algorithmQuestion',
+        "/api/algorithmQuestion",
         payload.data,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  DELETE_ALGORITHM_QUESTION: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  DELETE_ALGORITHM_QUESTION: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.deleteRequest(
         `/api/algorithmQuestion/${payload.questionId}`,
         null,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  GENERATE_EXAM: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  GENERATE_EXAM: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.getRequest(
-        '/api/algorithmQuestion/random',
+        "/api/algorithmQuestion/random",
         payload,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  GET_LIST_CANDIDATE: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  GET_LIST_CANDIDATE: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.getRequest(
-        '/api/candidates',
+        "/api/candidates",
         payload,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
     });
   },
 
-  GET_DETAIL_CANDIDATE: ({ commit }, payload) => { // eslint-disable-line no-unused-vars
+  GET_DETAIL_CANDIDATE: ({ commit }, payload) => {
     return new Promise((resolve, reject) => {
       apiCaller.getRequest(
         `/api/candidates/${payload.id}`,
         null,
-        res => {
+        (res) => {
           resolve(res);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -125,15 +126,15 @@ export default {
   getAuth({ commit }) {
     return new Promise((resolve, reject) => {
       apiCaller.getRequest(
-        '/api/auth',
-        '',
-        response => {
-          commit('setRole', response.data.data.role);
-          commit('setAuth', response.data.data);
-          commit('setToken', response.data.data.api_token);
+        "/api/auth",
+        "",
+        (response) => {
+          commit("setRole", response.data.data.role);
+          commit("setAuth", response.data.data);
+          commit("setToken", response.data.data.api_token);
           resolve(response.data);
         },
-        err => {
+        (err) => {
           AuthToken.removeToken();
           reject(err.response.data);
         }
@@ -144,14 +145,14 @@ export default {
   login({ commit }, credential) {
     return new Promise((resolve, reject) => {
       apiCaller.postRequest(
-        '/api/login',
+        "/api/login",
         credential,
-        response => {
-          commit('setToken', response.data.data.access_token);
+        (response) => {
+          commit("setToken", response.data.data.access_token);
           AuthToken.setToken(response.data.data.access_token);
           resolve(response);
         },
-        err => {
+        (err) => {
           reject(err.response.data);
         }
       );
@@ -159,10 +160,10 @@ export default {
   },
 
   logout({ commit }) {
-    return new Promise(resolve => {
-      commit('removeToken');
+    return new Promise((resolve) => {
+      commit("removeToken");
       AuthToken.removeToken();
       resolve();
     });
-  }
+  },
 };
