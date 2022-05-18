@@ -16,7 +16,7 @@ module.exports = {
     "vue/max-len": ["warn", 120],
     "max-lines": ["warn", 800],
     "max-params": ["warn", 5],
-    "newline-before-return": "warn",
+    "newline-before-return": "error",
     "no-cond-assign": ["error", "always"],
     "no-console": "error",
     "vue/no-dupe-keys": "error",
@@ -27,6 +27,12 @@ module.exports = {
     // quotes: ["error", "double"],
     "vue/semi": "off",
     "arrow-parens": ["warn", "always"],
-    "vue/require-prop-types" : "off"
+
+    //rule disable
+    "vue/require-prop-types": "off",
+    "vue/max-attributes-per-line": "off",
+    "vue/html-self-closing": "off",
+    "vue/require-default-prop": "off",
+    "vue/singleline-html-element-content-newline": "off",
   },
 };

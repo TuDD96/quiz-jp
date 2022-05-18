@@ -1,5 +1,4 @@
 <template>
-  asdsad
   <RouterView name="header" />
   <RouterView />
   <RouterView name="footer" />
