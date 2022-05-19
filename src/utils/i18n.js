@@ -1,45 +1,29 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
-import Cookies from "js-cookie";
+import { createI18n } from "vue-i18n";
 import { DEFAULT_LANG } from "@/definition/constants";
-import store from "@/store/index";
 
-Vue.use(VueI18n);
-
-const i18n = new VueI18n({
-  locale: Cookies.get("locale") || "vi",
-  fallbackLocale: Cookies.get("locale") || "vi",
-  messages: {},
+const i18n = createI18n({
+  locale: DEFAULT_LANG,
+  fallbackLocale: DEFAULT_LANG,
+  messages: loadLocaleMessages(),
 });
 
-/**
- * @param {String} locale
- */
-export async function loadMessages(locale) {
-  if (Object.keys(i18n.getLocaleMessage(locale)).length === 0) {
-    const messages = await import(`./../lang/${locale}.json`);
-    i18n.setLocaleMessage(locale, messages);
-  }
+function loadLocaleMessages() {
+  const locales = require.context(
+    "@/locales",
+    true,
+    /[A-Za-z0-9-_,\s]+\.json$/i
+  );
 
-  if (i18n.locale !== locale) {
-    i18n.locale = locale;
-  }
+  const messages = {};
+  locales.keys().forEach(async (key) => {
+    const matched = key.match(/([A-Za-z0-9-_]+)\./i);
+    if (matched && matched.length > 1) {
+      const locale = matched[1];
+      messages[locale] = await import(`@/locales/${locale}.json`);
+    }
+  });
+
+  return messages;
 }
-
-Vue.prototype.$loadMessages = loadMessages;
-
-(async function () {
-  let locale = Cookies.get("locale");
-  let check = false;
-  if (locale) {
-    store.getters["lang/locales"].map((item) => {
-      if (item.target === locale) check = true;
-
-      return item;
-    });
-  }
-  if (!check) locale = DEFAULT_LANG;
-  await loadMessages(locale);
-})();
 
 export default i18n;

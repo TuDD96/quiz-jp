@@ -13,7 +13,7 @@ export default [
     path: "/",
     name: "Home",
     components: {
-      default: p("FirstPage"),
+      default: p("HomePage"),
       header: pl("MainHeader"),
       footer: pl("MainFooter"),
     },
@@ -26,7 +26,7 @@ export default [
     path: "/login",
     name: "Login",
     components: {
-      default: p("PageTwo"),
+      default: p("LoginPage"),
       header: pl("MainHeader"),
       footer: pl("MainFooter"),
     },

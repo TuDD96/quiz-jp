@@ -10,7 +10,11 @@ const getters = {
   locales: (state) => state.locales,
 };
 
-const mutations = {};
+const mutations = {
+  setLocale: (state, value) => {
+    state.locale = value;
+  },
+};
 
 const actions = {};
 
