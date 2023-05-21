@@ -9,7 +9,11 @@ const router = createRouter({
   routes,
 });
 
+const DEFAULT_TITLE = "Quiz JP";
+
 router.beforeEach((to, from, next) => {
+  document.title = `${DEFAULT_TITLE} | ${to.meta.title}`;
+
   if (to.matched.some((record) => record.meta.requiresVisitor)) {
     if (authToken.getToken()) {
       next({

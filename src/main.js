@@ -11,7 +11,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@/sass/app.scss";
 
 // eslint-disable-next-line no-console
-console.log(process.env);
 const app = createApp(App);
 
 // package use

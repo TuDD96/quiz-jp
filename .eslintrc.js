@@ -9,6 +9,7 @@ module.exports = {
     // override/add rules settings here, such as:
     "vue/no-unused-vars": "error",
     "vue/arrow-spacing": "warn",
+    "no-console": "warn",
     "vue/block-spacing": ["warn", "always"],
     "vue/brace-style": ["warn", "1tbs"],
     // "camelcase": "warn",

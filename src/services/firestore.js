@@ -10,6 +10,9 @@ import {
   setDoc,
   deleteField,
   onSnapshot,
+  updateDoc,
+  where,
+  orderBy,
 } from "firebase/firestore";
 
 class BaseFirestore {}
@@ -18,7 +21,11 @@ class FirestoreService {
   // miss case where
   async getAll(collectionParam) {
     const cl = collection(db, collectionParam);
-    const q = query(cl);
+    const q = query(
+      cl,
+      where("del_flag", "==", false),
+      orderBy("created_at", "desc")
+    );
     const querySnap = await getDocs(q);
 
     return querySnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -69,6 +76,19 @@ class FirestoreService {
     });
 
     return await updateDoc(doc(db, collectionParam, documentId), fieldDelete);
+  }
+
+  async getQuizWithFileName(collectionParam, fileName) {
+    const cl = collection(db, collectionParam);
+    const q = query(
+      cl,
+      where("del_flag", "==", false),
+      where("title", "==", fileName),
+      orderBy("created_at", "desc")
+    );
+    const querySnap = await getDocs(q);
+
+    return querySnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 
   snapshotDocument(collectionParam, documentId, callback) {
